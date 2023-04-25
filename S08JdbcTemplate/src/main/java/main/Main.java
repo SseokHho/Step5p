@@ -10,11 +10,11 @@ import config.AppCtx;
 import spring.MemberInfoPrinter;
 import spring.MemberListPrinter;
 import spring.RegisterRequest;
-import spring.exeption.DuplicateMemberException;
-import spring.exeption.MemberNotFoundException;
-import spring.exeption.WrongIdPasswordException;
-import spring.service.ChangePasswordService;
-import spring.service.MemberRegisterService;
+import spring.exceptions.DuplicateMemberException;
+import spring.exceptions.MemberNotFoundException;
+import spring.exceptions.WrongIdPasswordException;
+import spring.services.ChangePasswordService;
+import spring.services.MemberRegisterService;
 
 public class Main {
 
@@ -23,8 +23,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		ctx = new AnnotationConfigApplicationContext(AppCtx.class);
 
-		BufferedReader reader =
-				new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
 			System.out.println("명렁어를 입력하세요:");
 			String command = reader.readLine();
@@ -52,8 +51,7 @@ public class Main {
 			printHelp();
 			return;
 		}
-		MemberRegisterService regSvc =
-				ctx.getBean("memberRegSvc", MemberRegisterService.class);
+		MemberRegisterService regSvc = ctx.getBean("memberRegSvc", MemberRegisterService.class);
 		RegisterRequest req = new RegisterRequest();
 		req.setEmail(arg[1]);
 		req.setName(arg[2]);
@@ -65,10 +63,10 @@ public class Main {
 			return;
 		}
 		try {
-			regSvc.regist(req);
-			System.out.println("등록했습니다.\n");
+			Long memberid = regSvc.regist(req);
+			System.out.printf("[입력성공] 멤버 ID(%d)로 등록했습니다.\n", memberid);
 		} catch (DuplicateMemberException e) {
-			System.out.println("이미 존재하는 이메일입니다.\n");
+			System.out.println("[입력실패] 이미 존재하는 이메일입니다.\n");
 		}
 	}
 

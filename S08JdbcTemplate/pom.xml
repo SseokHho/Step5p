@@ -37,7 +37,12 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.2.3</version>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>S03SpringDi</groupId>
+			<artifactId>S03SpringDi</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+  	</dependencies>
 
 	<build>
 		<plugins>

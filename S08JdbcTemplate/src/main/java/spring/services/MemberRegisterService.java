@@ -1,11 +1,11 @@
-package spring.service;
+package spring.services;
 
 import java.time.LocalDateTime;
 
 import spring.RegisterRequest;
 import spring.dao.Member;
 import spring.dao.MemberDao;
-import spring.exeption.DuplicateMemberException;
+import spring.exceptions.DuplicateMemberException;
 
 public class MemberRegisterService {
 	private MemberDao memberDao;
